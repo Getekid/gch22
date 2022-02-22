@@ -21,14 +21,24 @@ class Client:
         # If all the above fail, return True.
         return True
 
+    def __repr__(self):
+        return 'Client likes:' + str(self.likes) + ' Client dislikes' + str(self.dislikes)
 
-# Example.
-ingredients = ['cheese', 'peppers', 'basil', 'pineapple', 'mushrooms', 'tomatoes']
-clients = [
-    Client(['cheese', 'peppers']),
-    Client(['basil'], ['pineapple']),
-    Client(['mushrooms', 'tomatoes'], ['basil'])
-]
+
+ingredients = set()
+C = input()
+
+clients = []
+for i in range(int(C)):
+    liked = input().split(' ')[1:]
+    for ing in liked:
+        ingredients.add(ing)
+
+    disliked = input().split(' ')[1:]
+    for ing in disliked:
+        ingredients.add(ing)
+
+    clients.append(Client(liked, disliked))
 
 # Brute force, try all possible combinations and keep the one with the highest popularity.
 popularity_max = 0
