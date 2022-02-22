@@ -32,28 +32,20 @@ class Client:
 
 C = input()
 
-ingredients_cost = {}
 clients = []
 for i in range(int(C)):
     liked = input().split(' ')[1:]
-    for ing in liked:
-        if ing not in ingredients_cost:
-            ingredients_cost[ing] = 0
-
     disliked = input().split(' ')[1:]
-    for ing in disliked:
-        ingredients_cost[ing] = 1 if ing not in ingredients_cost else ingredients_cost[ing] + 1
-
     clients.append(Client(liked, disliked))
 
-# Build a list of the added costs for each client.
-# This doesn't take into account overlaps, i.e. a client that dislikes two ingredients
-# will be counted twice for a client that likes both.
+# Calculate the cost for each client,
+# i.e. how many clients we'll lose if we include that client.
 for client in clients:
-    cost = 0
-    for ing in client.likes:
-        cost += ingredients_cost[ing]
-    client.cost = cost
+    pizza_client = client.likes
+    for client2 in clients:
+        pizza_client2 = client2.likes
+        if client.dislikes_pizza(pizza_client2) or client2.dislikes_pizza(pizza_client):
+            client.cost += 1
 
 # Sort the clients according to their cost.
 clients_sorted = sorted(clients, key=lambda x: x.cost)
