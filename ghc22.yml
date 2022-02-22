@@ -14,6 +14,7 @@ dependencies:
   - libstdcxx-ng=9.3.0=hd4cf53a_17
   - libuuid=1.0.3=h7f8727e_2
   - ncurses=6.3=h7f8727e_2
+  - networkx=2.6.3=pyhd3eb1b0_0
   - openssl=1.1.1m=h7f8727e_0
   - pip=21.2.4=py310h06a4308_0
   - python=3.10.0=h12debd9_4
