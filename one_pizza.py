@@ -1,6 +1,3 @@
-from itertools import combinations
-
-
 class Client:
     def __init__(self, likes, dislikes=None):
         if dislikes is None:
@@ -30,7 +27,7 @@ class Client:
         return True
 
     def __repr__(self):
-        return 'Client likes' + str(self.likes) + ' and dislikes' + str(self.dislikes)
+        return 'Client likes {0} and dislikes {1} with cost {2}'.format(self.likes, self.dislikes, self.cost)
 
 
 C = input()
@@ -65,10 +62,10 @@ clients_sorted = sorted(clients, key=lambda x: x.cost)
 # Also keep track of the disliked ingredients of the clients we accept and ignore those who like them.
 best_pizza = set()
 ingredients_banned = set()
-for client in clients:
+for client in clients_sorted:
     if client.dislikes_pizza(best_pizza):
         continue
-    if ingredients_banned and not ingredients_banned.intersection(set(client.likes)):
+    if ingredients_banned and ingredients_banned.intersection(set(client.likes)):
         continue
 
     for ing in client.likes:
